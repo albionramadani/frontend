@@ -1,8 +1,21 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from "vue";
+import App from "./App.vue";
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import "font-awesome/css/font-awesome.min.css";
+import store from "./store";
+import router from "./router";
+
+Vue.filter("currency", (value) =>
+  new Intl.NumberFormat("en-Us", { style: "currency", currency: "USD" }).format(
+    value
+  )
+);
 
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+  render: (h) => h(App),
+  store,
+  router,
+}).$mount("#app");
