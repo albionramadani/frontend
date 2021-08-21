@@ -14,6 +14,7 @@
       </li>
     </ul>
   </div>
+  <CartSummary/>
 </nav>
   
 
@@ -21,9 +22,10 @@
 
 <script>
 import {mapState} from "vuex";
+import CartSummary from "./CartSummary"
 
 export default {
-  components: {},
+  components: { CartSummary },
   computed:{
           ...mapState(["pages"])
       },

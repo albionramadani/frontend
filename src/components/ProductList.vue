@@ -22,33 +22,41 @@
                     </p>
                 </div>
             </div>
-           
+           <ProductPagination />
         </div>
     </div>
 </template>
 
 <script>
 
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 
 import CategoryList from "./CategoryList";
+import ProductPagination from "./ProductPagination";
 
 export default {
     components: {
-        CategoryList
+        CategoryList,
+        ProductPagination
     },
     computed:{
             ...mapState(["products","productImages"]),
         },
         methods:{
+            ...mapMutations(["setCurrentCategory","setCurrentPage"]),
             ...mapActions(["setProductsByCategoryAction"])
         },
         created(){
              let category = this.$route.params.category;
             this.setProductsByCategoryAction(category);
+            this.setCurrentCategory(category);
+
         },
         beforeRouteUpdate(to, from, next ){
+            this.setCurrentPage(1);
             this.setProductsByCategoryAction(to.params.category);
+            this.setCurrentCategory(to.params.category);
+
             next();
         }
     };
