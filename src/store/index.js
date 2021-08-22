@@ -3,6 +3,8 @@ import Vuex from "vuex";
 import Axios from "axios";
 import CartModule  from "./cart";
 
+import OrdersModule from "./orders";
+
 Vue.use(Vuex);
 
 const baseUrl = "https://localhost:44369/api";
@@ -14,7 +16,8 @@ const productImagesUrl = "https://localhost:44369/media/products/";
 export default new Vuex.Store({
   strict: true,
   modules: {
-      cart: CartModule
+      cart: CartModule,
+      orders: OrdersModule,
   },
   state: {
     pages: [],
@@ -70,7 +73,7 @@ export default new Vuex.Store({
       context.commit("setProducts", (await Axios.get(url)).data);
     },
 
-    //------------------//
+    //-------Page-ing -----------//
     async setProductsByCategoryPaginationAction(context, page) {
         let url;
         if (context.state.currentCategory !== "all") {
