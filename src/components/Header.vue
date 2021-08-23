@@ -12,6 +12,11 @@
                    {{p.name}}
             </router-link>
       </li>
+       <li class="nav-item active" >
+           <router-link to="/admin" class="nav-link">
+                    Admin
+            </router-link> 
+      </li>
     </ul>
   </div>
   <CartSummary/>
