@@ -6,7 +6,7 @@
         </div>
 
         <div class="col-9">
-           {{pageContent}}
+            <div v-html="pageContent"></div>
         </div>
     </div>
 </template>

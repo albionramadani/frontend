@@ -26,4 +26,6 @@ export default {
     this.initializeCart(this.$store);
   },
 };
+// npm set audit false 
+
 </script>

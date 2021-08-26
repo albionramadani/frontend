@@ -11,6 +11,9 @@ import router from "./router";
 import Vuelidate from "vuelidate";
 Vue.use(Vuelidate);
 
+import Vue2Editor from "vue2-editor";
+Vue.use(Vue2Editor);
+
 Vue.filter("currency", (value) =>
   new Intl.NumberFormat("en-Us", { style: "currency", currency: "USD" }).format(
     value

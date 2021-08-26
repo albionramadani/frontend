@@ -4,12 +4,12 @@
       {{ editMode ? "Edit Page" : "Add Page" }}
     </h2>
 
-    <!-- <h4
+    <h4
       v-if="$v.$invalid && $v.$dirty"
       class="bg-danger text-white text-center p-2"
     >
       Values Required for All Fields!
-    </h4> -->
+    </h4>
 
     <div class="form-group">
       <label for="">Name</label>
@@ -22,7 +22,8 @@
 
     <div class="form-group">
       <label for="">Content </label>
-      <textarea class="form-control" v-model="page.content"></textarea>
+      <!-- <textarea class="form-control" v-model="page.content"></textarea> -->
+      <vue-editor v-model="page.content"></vue-editor>
     </div>
 
     <div class="text-center">
