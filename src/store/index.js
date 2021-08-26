@@ -94,6 +94,13 @@ export default new Vuex.Store({
     async editProduct(context, product){
       await Axios.put(productsUrl, product);
       
-    }
+    },
+    async deleteProduct(context, product){
+      await Axios.delete(`${productsUrl}/${product.id}`);
+      
+      let url= `${productsUrl}?p=${context.state.currentPage}`;
+      context.commit('setProducts', (await Axios.get(url)).data);
+
+    },
   },
 });

@@ -57,10 +57,11 @@ export default {
   },
   methods: {
     ...mapMutations(["setCurrentCategory"]),
-    ...mapActions(["setProductsByCategoryAction"]),
+    ...mapActions(["setProductsByCategoryAction", "deleteProduct"]),
     handleEdit(product) {
       this.$router.push(`/admin/products/edit/${product.id}`);
     },
+    
   },
   created() {
     this.setCurrentCategory("all");

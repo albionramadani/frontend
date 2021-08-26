@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapMutations, mapState } from "vuex";
 // import ProductPagination from "../ProductPagination";
 
 export default {
@@ -74,6 +74,7 @@ export default {
     },
   },
   methods: {
+    ...mapMutations(["setCurrentPage"]),
     ...mapActions(["addProduct", "editProduct"]),
     onFileSelected(e) {
       this.product.image = e.target.files[0];
@@ -99,7 +100,7 @@ export default {
       } else {
         await this.addProduct(product);
       }
-
+      this.setCurrentPage(1);
       this.$router.push("/admin/products");
     },
   },
