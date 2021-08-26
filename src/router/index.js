@@ -10,6 +10,8 @@ import thanks from "../components/Thanks.vue";
 import Admin from "../components/admin/Admin";
 import Products from "../components/admin/Products";
 import ProductEditor from "../components/admin/ProductEditor";
+import AdminPages from "../components/admin/Pages";
+import PageEditor from "../components/admin/PageEditor";
 
 
 Vue.use(VueRouter);
@@ -27,6 +29,9 @@ export default new VueRouter({
       children: [
             {path: "products", component: Products},
             {path: "products/:op(add|edit)/:id(\\d+)?", component: ProductEditor},
+            {path: "pages", component: AdminPages},
+            {path: "pages/:op(add|edit)/:id(\\d+)?", component: PageEditor},
+
             {path: "*", redirect: "/admin/products"},
         ],
     },

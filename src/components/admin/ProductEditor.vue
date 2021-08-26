@@ -4,6 +4,10 @@
       {{ editMode ? "Edit Product" : "AddProduct" }}
     </h2>
 
+  <h4 v-if="$v.$invalid && $v.$dirty" class="bg-danger text-white text-center p-2">
+    Values Required for All Fields!
+  </h4>
+
     <div class="form-group">
       <label for="">Name</label>
       <input type="text" class="form-control" v-model="product.name" />
@@ -52,6 +56,7 @@
 
 <script>
 import { mapActions, mapMutations, mapState } from "vuex";
+import {required} from "vuelidate/lib/validators";
 // import ProductPagination from "../ProductPagination";
 
 export default {
@@ -65,6 +70,14 @@ export default {
         category: null,
       },
     };
+  },
+  validations:{
+    product:{
+        name: {required},
+        description: {required},
+        price: {required},
+        category: {required},  
+    },
   },
   computed: {
     ...mapState(["categories", "productImages"]),

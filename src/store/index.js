@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import Axios from "axios";
-import CartModule  from "./cart";
+import CartModule from "./cart";
 
 import OrdersModule from "./orders";
 
@@ -16,8 +16,8 @@ const productImagesUrl = "https://localhost:44369/media/products/";
 export default new Vuex.Store({
   strict: true,
   modules: {
-      cart: CartModule,
-      orders: OrdersModule,
+    cart: CartModule,
+    orders: OrdersModule,
   },
   state: {
     pages: [],
@@ -29,8 +29,9 @@ export default new Vuex.Store({
     pageSize: 4,
     currentCategory: "all",
   },
-  getters:{
-    productById: state => id => state.products.find((p) =>p.id ==id)
+  getters: {
+    productById: (state) => (id) => state.products.find((p) => p.id == id),
+    PageById: (state) => (id) => state.pages.find((p) => p.id == id),
   },
   mutations: {
     setPages(state, pages) {
@@ -78,29 +79,40 @@ export default new Vuex.Store({
 
     //-------Page-ing -----------//
     async setProductsByCategoryPaginationAction(context, page) {
-        let url;
-        if (context.state.currentCategory !== "all") {
-            url = `${productsUrl}/${context.state.currentCategory}?p=${page}`;
-        } else {
-            url = `${productsUrl}?p=${page}`;
-        }
+      let url;
+      if (context.state.currentCategory !== "all") {
+        url = `${productsUrl}/${context.state.currentCategory}?p=${page}`;
+      } else {
+        url = `${productsUrl}?p=${page}`;
+      }
 
-        context.commit("setProducts", (await Axios.get(url)).data);
+      context.commit("setProducts", (await Axios.get(url)).data);
     },
-    async addProduct(context, product){
+    async addProduct(context, product) {
       await Axios.post(productsUrl, product);
-
     },
-    async editProduct(context, product){
+    async editProduct(context, product) {
       await Axios.put(productsUrl, product);
-      
     },
-    async deleteProduct(context, product){
+    async deleteProduct(context, product) {
       await Axios.delete(`${productsUrl}/${product.id}`);
-      
-      let url= `${productsUrl}?p=${context.state.currentPage}`;
-      context.commit('setProducts', (await Axios.get(url)).data);
 
+      let url = `${productsUrl}?p=${context.state.currentPage}`;
+      context.commit("setProducts", (await Axios.get(url)).data);
+    },
+    async addPage(context, page) {
+      await Axios.post(pagesUrl, page);
+      context.commit("setPages", (await Axios.get(pagesUrl)).data);
+    },
+    async editPage(context, page) {
+      await Axios.put(`${pagesUrl}/${page.id}`, page);
+      context.commit("setPages", (await Axios.get(pagesUrl)).data);
+    },
+    async deletePage(context, page) {
+      await Axios.delete(`${pagesUrl}/${page.id}`);
+
+      let url = `${pagesUrl}?p=${context.state.currentPage}`;
+      context.commit("setPages", (await Axios.get(url)).data);
     },
   },
 });
